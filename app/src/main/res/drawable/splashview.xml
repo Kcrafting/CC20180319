@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white" />
+    <item>
+        <bitmap
+            android:src="@drawable/logo"
+            android:gravity="center"></bitmap>
+    </item>
+</layer-list><!--引入内容为以上，元内容改为备注，设置了元素的颜色，背景图片--><!--?xml version="1.0" encoding="utf-8"?--><!--selector xmlns:android="http://schemas.android.com/apk/res/android"--><!-- 背景颜色 --><!--item android:drawable="@color/colorBlack" /-->
+
+    <!--item--><!-- 图片 --><!--bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_menu_camera" /--><!--/item--><!--/selector--><!--这是用于应用程序启动的Splash（闪屏）界面-->

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="0dp"
+    android:orientation="vertical">
+    <!--此区域内容注意 根元素的高度设置，如果默认match_parent高度将会占满整个界面！-->
+    <!--此布局是用来设置Recycle的Item的布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:gravity="center_horizontal"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="#414141"
+        android:orientation="vertical">
+        <!--
+    <View  android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#000000"
+        android:gravity="center_horizontal"
+        />
+        -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:maxLines="1"
+            android:gravity="center"
+            android:id="@+id/r_username"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="50dp" />
+
+        <View
+
+            android:layout_weight="0"
+            android:layout_width="0.5dp"
+            android:layout_height="20dp"
+            android:background="#c6c3c3"
+            android:gravity="center"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:maxLines="1"
+            android:gravity="center"
+            android:id="@+id/r_code"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="50dp" />
+
+        <View
+            android:layout_weight="0"
+            android:layout_width="0.5dp"
+            android:layout_height="20dp"
+            android:background="#c6c3c3"
+            android:gravity="center"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:maxLines="1"
+            android:gravity="center"
+            android:id="@+id/r_time"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="50dp" />
+
+        <View
+            android:layout_weight="0"
+            android:layout_width="0.5dp"
+            android:layout_height="20dp"
+            android:background="#c6c3c3"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" />
+
+        <ImageView
+
+            android:gravity="center"
+            android:id="@+id/r_image"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

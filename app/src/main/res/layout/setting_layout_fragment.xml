@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textAlignment="center"
+            android:text="IP地址设置"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/set_ip"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:hint="请输入IP地址"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textAlignment="center"
+            android:text="端口设置"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/set_port"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:hint="请输入通讯端口号"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textAlignment="center"
+            android:text="通讯识别码"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/set_identify"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:hint="请输入通讯识别码"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#36ec91"
+        android:text="请注意，如不确定端口的使用情况，则可以不设置端口号，服务器和应用程序会自动查找可用端口号，如指定已使用的端口号，则无法连接到服务器！"
+        android:textSize="12dp" />
+    <!--测试用的按钮
+    <com.suke.widget.SwitchButton
+        android:id="@+id/switchscanner"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        app:sb_checked="false"
+        app:sb_show_indicator="true"/>
+        -->
+</LinearLayout>

@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+
+        <!--上面这一句使用来设置Splash（闪屏）界面-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashview</item>
+        <!--上面这一句使用来设置Splash（闪屏）界面-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--以下是自定义的闪屏主题-->
+    <!--定义原理:活动在加载之前会首先加载活动主题(Theme)的默认背景(一半默认的主题都是黑色或者白色)-->
+    <!--如果应用程序的加载事件比较长，那么在启动活动的时候，应用程序会白屏一段时间，很不友好-->
+    <!--这时我们可以将启动活动的主题的背景颜色换成图片，那么在加载的过程中就会显示图片了-->
+    <!--我们在splashview中定义了图层，背景为白色，并定义了居中的logo-->
+    <!--然后我们定义了一个主题，为了让主题能匹配原主题，我们的自定义主题必须派生于原主题，否则运行时必会出错！-->
+    <!--以下可以看到我们派生了一个主题，并定义了背景，如此一来，splash闪屏完成！-->
+    <!--由于更换splash的活动，派生同样需要更换-->
+    <!--<style name="SplashTheme" parent="AppTheme.NoActionBar">-->
+    <style name="SplashTheme" parent="FullscreenTheme">
+        <!--<item name="android:windowBackground">@drawable/start_app</item>-->
+        <item name="android:windowBackground">@drawable/splashview</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+</resources>

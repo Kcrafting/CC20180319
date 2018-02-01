@@ -1,0 +1,2 @@
+include ':app', ':library_ui_switchbutton'
+project(':library_ui_switchbutton').projectDir = new File('library')

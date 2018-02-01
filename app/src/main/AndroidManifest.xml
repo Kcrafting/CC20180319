@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kcraf.scancoder">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 以下登陆界面 -->
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:launchMode="singleTask">
+
+            <!-- android:theme="@style/SplashTheme" -->
+            <!-- 废掉 -->
+            <!-- 在上面的属性中加入了Theme属性 -->
+        </activity>
+        <!-- 由于设置了Splash，所以需要新建一个活动来启动splash，如果以主视图作为住活动，那么背景将也会出现splash画面 -->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- 以下内容用于注册主活动 -->
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+            <!--以上的内容，因为主题设置错误，导致多次运行时意外终止！可见主题设置错误。将导致程序异常崩溃-->
+
+            <!-- 注册主活动完毕 -->
+        </activity>
+        <!--需要启动闪屏的活动，需要修改主题-->
+
+        <!--因为使用singleTask模式导致应用进入后台后无法再次启动，每次会创建新的进程但是却不现实界面-->>
+        <!--以上问题是由于onCreate中加入了finish导致。查明-->
+        <!--android:launchMode="singleTask"-->
+        <activity
+            android:name=".splashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--测试完毕，弃用！-->
+        <activity android:name=".splash2Activity"></activity>
+    </application>
+
+</manifest>
