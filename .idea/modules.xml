@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScanCoder.iml" filepath="$PROJECT_DIR$/ScanCoder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CodeScanner.iml" filepath="$PROJECT_DIR$/CodeScanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library_ui_switchbutton.iml" filepath="$PROJECT_DIR$/library/library_ui_switchbutton.iml" />
     </modules>

@@ -78,8 +78,6 @@ public class scan_layout_fragment extends Fragment {
                 //recyclerView
             }
         });
-
-
         return view;
     }
 }
