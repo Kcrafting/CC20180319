@@ -30,8 +30,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static android.os.Build.HOST;
 
 /**
  * 这是新建的一个碎片，由系统的新建碎片建立的，但是注意此碎片并没有使用
@@ -45,7 +56,14 @@ public class MainActivity extends ZJFActivity
     private static boolean AdministratorLoginStats = false;//控制显示是否设置管理设置页面为选中状态
     private static MenuItem Gloitem = null;//设置一个全局的变量来设置菜单的选中状态
     public static Button Button_Save = null;
-
+    //以下用于Socket
+    private ExecutorService mExecutorService = null;//用于管理Socket的线程池实例
+    private PrintWriter printWriter;//输出实例
+    private BufferedReader in;//输入的获取实例
+    private static final String TAG = "SOCKET:";//调试标签
+    private static String HOST = "";//服务器IP
+    private static int PORT = 0;//服务器端口
+    private String receiveMsg;//收到的信息
     @Override
     protected void onCreate(Bundle savedInstanceState) {//重载的创建事件，尝试从之前的视图恢复
         super.onCreate(savedInstanceState);
@@ -99,8 +117,68 @@ public class MainActivity extends ZJFActivity
 
         //TextView textView1=(TextView)findViewById(R.id.r_username);
         //textView1.setText("aaa");
+        //新建一个用于管理socket的线程池
+        mExecutorService = Executors.newCachedThreadPool();
 
+    }
+    public void connect(View view) {//创建链接函数
+        mExecutorService.execute(new connectService());//在线程池内创建线程执行
+    }
 
+    public void send(View view,String sendMsg) {//发送信息函数
+        mExecutorService.execute(new sendService(sendMsg));//同上
+    }
+
+    public void disconnect(View view) {//断开连接
+        mExecutorService.execute(new sendService("0"));
+    }
+
+    private class sendService implements Runnable {
+        private String msg;
+
+        sendService(String msg) {
+            this.msg = msg;
+        }
+
+        @Override
+        public void run() {
+            printWriter.println(this.msg);
+        }
+    }
+
+    private class connectService implements Runnable {
+        @Override
+        public void run() {
+            try {
+                Socket socket = new Socket(HOST, PORT);//新建Socket实例，使用ip端口初始化
+                //socket.setSoTimeout(60000);
+                printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                        socket.getOutputStream(), "UTF-8")), true);//初始化时新建输出实例
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));//初始化时新建输入实例
+                receiveMsg();//接收信息
+            } catch (Exception e) {
+                Log.e(TAG, ("connectService:" + e.getMessage()));
+            }
+        }
+    }
+
+    private void receiveMsg() {
+        try {
+            while (true) {
+                if ((receiveMsg = in.readLine()) != null) {
+                    Log.d(TAG, "receiveMsg:" + receiveMsg);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d(TAG, receiveMsg);
+                        }
+                    });
+                }
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "receiveMsg: ");
+            e.printStackTrace();
+        }
     }
 
     @Override
