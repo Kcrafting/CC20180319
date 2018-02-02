@@ -61,9 +61,10 @@ public class MainActivity extends ZJFActivity
     private PrintWriter printWriter;//输出实例
     private BufferedReader in;//输入的获取实例
     private static final String TAG = "SOCKET:";//调试标签
-    private static String HOST = "";//服务器IP
-    private static int PORT = 0;//服务器端口
+    private static String HOST = "192.168.31.141";//服务器IP
+    private static int PORT = 55533;//服务器端口
     private String receiveMsg;//收到的信息
+    private boolean SocketLoginStatus=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {//重载的创建事件，尝试从之前的视图恢复
         super.onCreate(savedInstanceState);
@@ -83,9 +84,9 @@ public class MainActivity extends ZJFActivity
         setContentView(R.layout.activity_main);//切换主视图
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//获取工具栏的界面布局
         toolbar.setTitle("扫码");//设置标题栏显示的内容
-        toolbar.setTitleTextColor(Color.parseColor("#00FF00") );
+
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF") );
-        toolbar.setTitleTextColor(Color.parseColor("#FF0000") );
+        //
         setSupportActionBar(toolbar);//将工具栏配置到应用
         int ToolbarHeight=toolbar.getHeight();//获取到Toolbar的高度
         NavigationView navigationView1=(NavigationView)findViewById(R.id.nav_view);
@@ -119,17 +120,27 @@ public class MainActivity extends ZJFActivity
         //textView1.setText("aaa");
         //新建一个用于管理socket的线程池
         mExecutorService = Executors.newCachedThreadPool();
-
+        //View view=;
+        connect(null);
+        if (SocketLoginStatus){
+            toolbar.setTitleTextColor(Color.parseColor("#00FF00") );
+        }else{
+            toolbar.setTitleTextColor(Color.parseColor("#FF0000") );
+        }
     }
+
     public void connect(View view) {//创建链接函数
+        Log.e(TAG, ("connect() 调用"));
         mExecutorService.execute(new connectService());//在线程池内创建线程执行
     }
 
     public void send(View view,String sendMsg) {//发送信息函数
+        Log.e(TAG, ("send() 调用"));
         mExecutorService.execute(new sendService(sendMsg));//同上
     }
 
     public void disconnect(View view) {//断开连接
+        Log.e(TAG, ("disconnect() 调用"));
         mExecutorService.execute(new sendService("0"));
     }
 
@@ -137,11 +148,13 @@ public class MainActivity extends ZJFActivity
         private String msg;
 
         sendService(String msg) {
+            Log.e(TAG, ("sendService sendService(String msg) 调用"));
             this.msg = msg;
         }
 
         @Override
         public void run() {
+            Log.e(TAG, ("sendService run() 调用"));
             printWriter.println(this.msg);
         }
     }
@@ -155,6 +168,11 @@ public class MainActivity extends ZJFActivity
                 printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
                         socket.getOutputStream(), "UTF-8")), true);//初始化时新建输出实例
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));//初始化时新建输入实例
+
+                Log.e(TAG, ("connectService 成功"));
+                SocketLoginStatus=true;
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);//获取工具栏的界面布局
+                toolbar.setTitleTextColor(Color.parseColor("#00FF00") );
                 receiveMsg();//接收信息
             } catch (Exception e) {
                 Log.e(TAG, ("connectService:" + e.getMessage()));
@@ -163,6 +181,7 @@ public class MainActivity extends ZJFActivity
     }
 
     private void receiveMsg() {
+        Log.e(TAG, ("receiveMsg() 调用"));
         try {
             while (true) {
                 if ((receiveMsg = in.readLine()) != null) {
